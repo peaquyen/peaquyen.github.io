@@ -1,4 +1,7 @@
 <?php
+// Ensure no output before setting the header
+ob_start(); 
+
 header('Content-Type: application/json');
 
 $root_dir = __DIR__;
@@ -49,6 +52,8 @@ foreach ($words_files as $file) {
 usort($posts, function ($a, $b) {
     return $b['date'] - $a['date'];
 });
+
+ob_end_clean();
 
 echo json_encode($posts);
 ?>
