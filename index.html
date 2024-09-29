@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bỏ Vô Phin - Chọn</title>
+    <style type="text/css">
+        body {
+            margin: 40px auto;
+            max-width: 650px;
+            line-height: 1.6;
+            font-size: 18px;
+            color: #333; /* Standard dark color for text */
+            padding: 0 10px;
+            background-color: #fff; /* White background for light theme */
+            transition: background-color 0.3s, color 0.3s;
+            font-family: Arial, sans-serif;
+        }
+        body.dark-mode {
+            background-color: #2b2b2b; /* Dark background for dark theme */
+            color: #e0e0e0; /* Light text for dark theme */
+        }
+        h1, h2, h3 {
+            line-height: 1.2;
+            color: inherit; /* Inherits the text color for simplicity */
+        }
+        #posts-container a {
+            display: block;
+            margin: 10px 0;
+            color: #d9534f; /* Hot accent color for links in light theme */
+            text-decoration: none;
+        }
+        body.dark-mode #posts-container a {
+            color: #420b0b; /* Warm accent color for links in dark theme */
+        }
+        #posts-container a:hover {
+            text-decoration: underline;
+        }
+        .category-group {
+            margin-bottom: 30px;
+            background: #ffffff;
+            padding: 20px;
+            border: 1px solid #ddd; /* Neutral border color */
+            border-radius: 8px;
+        }
+        .category-group h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #d9534f; /* Hot accent color for headers in light theme */
+        }
+        #toggle-dark-mode {
+            cursor: pointer;
+            background-color: #d9534f; /* Hot accent color for button in light theme */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        body.dark-mode #toggle-dark-mode {
+            background-color: #f0ad4e; /* Warm accent color for button in dark theme */
+            color: #2b2b2b; /* Dark text on warm button */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bỏ Vô Phin☕</h1>
+        <button id="toggle-dark-mode">Switch to Dark Mode</button>
+    </header>
+
+    <main id="content">
+        <h2>Latest Posts</h2>
+        <div id="posts-container">
+            <!-- Dynamic content will be loaded here -->
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Function to enable dark mode
+        const enableDarkMode = () => {
+            document.body.classList.add('dark-mode');
+            toggleButton.textContent = 'Switch to Light Mode';
+            window.location.hash = 'dark';
+        };
+
+        // Function to disable dark mode
+        const disableDarkMode = () => {
+            document.body.classList.remove('dark-mode');
+            toggleButton.textContent = 'Switch to Dark Mode';
+            window.location.hash = 'light';
+        };
+
+        // Get the toggle button
+        const toggleButton = document.getElementById('toggle-dark-mode');
+
+        // Apply the correct mode based on the URL hash
+        const applyModeFromHash = () => {
+            if (window.location.hash === '#dark') {
+                enableDarkMode();
+            } else {
+                disableDarkMode();
+            }
+        };
+
+        // Apply the mode on page load based on the hash
+        applyModeFromHash();
+
+        // Add event listener to the toggle button
+        toggleButton.addEventListener('click', () => {
+            if (document.body.classList.contains('dark-mode')) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+
+        // Add an event listener to detect changes in the URL hash
+        window.addEventListener('hashchange', applyModeFromHash);
+    </script>
+</body>
+</html>
